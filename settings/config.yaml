@@ -1,0 +1,29 @@
+
+network:
+  net-id: 192.168.1.1
+  net-mask: 255.255.255.0
+  dvr:
+    make: hikvision
+    ip: 192.168.1.20
+    rtsp-port: 554
+    username: admin
+    password: admin
+
+cameras:
+  - name: camera1
+    id: 101
+  - name: camera2
+    id: 102
+  - name: camera3
+    id: 103
+  - name: camera4
+    id: 104
+  - name: camera5
+    id: 105
+  - name: camera6
+    id: 106
+  - name: camera7
+    id: 107
+  - name: camera8
+    id: 108
+
