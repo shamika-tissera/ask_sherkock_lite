@@ -12,16 +12,16 @@ class DetectorApp:
     
     def __init__(self):
         self.cam_details = []
-        self.init_cameras()
         self.settings_handler = SettingsHandler()
         self.camera_objects = {}
+        self.init_cameras()
     
     def init_cameras(self):
         
         self.cam_details = self.settings_handler.get_camera_info()
         
         for cam in self.cam_details:
-            cam_obj = Camera(cam['id'], cam['name'], None)
+            cam_obj = Camera(cam['id'], cam['name'])
             
             self.camera_objects[cam['id']] = cam_obj
             cam_obj.arm()
@@ -29,3 +29,6 @@ class DetectorApp:
     
     def get_cameras(self):
         return self.camera_objects
+    
+    def get_camera(self, camera_id):
+        return self.camera_objects[camera_id]

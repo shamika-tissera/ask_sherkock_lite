@@ -20,7 +20,7 @@ class Camera(ICamera):
         self.current_frame = None  # attribute to store the current frame
         self.frame_queue = queue.Queue()
         self.name = name
-        self.cap = cv2.VideoCapture(self.get_rtsp_base_url() + str(self.camera_id))
+        self.cap = cv2.VideoCapture('./videos/street.mp4')
         self.self_settings_handler_singleton = SettingsHandlerSingleton()
         
     def check_dvr_compatibility(self):
@@ -42,7 +42,7 @@ class Camera(ICamera):
             while True:
                 ret, frame = self.cap.read()
                 if ret:
-                    self.frame_queue.put(frame)  # Add the new frame to the queue
+                    # self.frame_queue.put(frame)  # Add the new frame to the queue
                     self.current_frame = frame  # Update the current frame
 
         streaming_thread = threading.Thread(target=stream)

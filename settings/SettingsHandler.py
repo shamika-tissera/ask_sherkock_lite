@@ -1,4 +1,5 @@
 import yaml
+import os
 
 class SettingsHandlerSingleton:
     
@@ -15,7 +16,11 @@ class SettingsHandlerSingleton:
         
     def load_settings(self):
         try:
-            with open('config.yaml', 'r') as file:
+            # Get the directory of this script
+            script_dir = os.path.dirname(os.path.realpath(__file__))
+            # Construct the full path to the config file
+            config_path = os.path.join(script_dir, './config/config.yaml')
+            with open(config_path, 'r') as file:
                 self.settings = yaml.safe_load(file)
         except FileNotFoundError:
             raise FileNotFoundError("Config file not found")
@@ -24,11 +29,11 @@ class SettingsHandlerSingleton:
         return self.settings
     
     def get_dvr_info(self):
-        ip = self.settings['dvr']['ip']
-        port = self.settings['dvr']['port']
-        user = self.settings['dvr']['user']
-        password = self.settings['dvr']['password']
-        make = self.settings['dvr']['make']
+        ip = self.settings['network']['dvr']['ip']
+        port = self.settings['network']['dvr']['port']
+        user = self.settings['network']['dvr']['username']
+        password = self.settings['network']['dvr']['password']
+        make = self.settings['network']['dvr']['make']
         return ip, port, user, password, make
     
     def get_camera_info(self):
@@ -36,11 +41,3 @@ class SettingsHandlerSingleton:
     
     def get_camera_ids(self):
         return [camera['id'] for camera in self.get_camera_info()]
-    
-
-# obj = SettingsHandlerSingleton()
-
-# cam_details = obj.get_camera_info()
-
-
-# print(obj.get_camera_info())
